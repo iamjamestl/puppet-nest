@@ -2,7 +2,7 @@ class nest::base::firmware::arm {
   # For nest::base::portage::makeopts
   include '::nest::base::portage'
 
-  case $facts['profile']['platform'] {
+  case $facts['nest']['profile']['platform'] {
     'pinebookpro': {
       nest::lib::toolchain { 'arm-none-eabi':
         gcc_only => true,

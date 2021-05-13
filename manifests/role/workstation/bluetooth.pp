@@ -10,7 +10,7 @@ class nest::role::workstation::bluetooth {
     enable => true,
   }
 
-  if $facts['profile']['platform'] == 'raspberrypi' {
+  if $facts['nest']['profile']['platform'] == 'raspberrypi' {
     file { '/etc/systemd/system/btattach.service':
       mode   => '0644',
       owner  => 'root',

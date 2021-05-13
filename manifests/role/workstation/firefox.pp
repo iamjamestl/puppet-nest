@@ -17,7 +17,7 @@ class nest::role::workstation::firefox {
         ensure => installed,
       }
 
-      $webrender = $facts['profile']['platform'] ? {
+      $webrender = $facts['nest']['profile']['platform'] ? {
         'pinebookpro' => 0,
         'raspberrypi' => 0,
         default       => 1,

@@ -70,7 +70,7 @@ define nest::lib::pod (
       '--replace',
       $dns_args,
       $publish_args,
-      "--label=nest.podman.version=${facts['podman_version']}",
+      "--label=nest.podman.version=${facts['nest']['podman_version']}",
       "--name=${name}",
     ].flatten
 

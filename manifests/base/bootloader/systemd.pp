@@ -1,6 +1,6 @@
 class nest::base::bootloader::systemd {
   if $facts['mountpoints']['/boot'] {
-    if $facts['is_container'] or $facts['dmi']['bios']['vendor'] == 'U-Boot' {
+    if $facts['nest']['is_container'] or $facts['dmi']['bios']['vendor'] == 'U-Boot' {
       $bootctl_args = '--no-variables'
     } else {
       $bootctl_args = ''
@@ -24,7 +24,7 @@ class nest::base::bootloader::systemd {
         group => 'root',
       ;
 
-      "/boot/${facts['machine_id']}":
+      "/boot/${facts['nest']['machine_id']}":
         ensure => directory,
         before => Exec['kernel-install'],
       ;

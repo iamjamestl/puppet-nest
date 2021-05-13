@@ -32,7 +32,7 @@ class nest::base::zfs {
 
   nest::lib::systemd_reload { 'zfs': }
 
-  unless $facts['is_container'] or $facts['running_live'] {
+  unless $facts['nest']['is_container'] or $facts['nest']['running_live'] {
     exec { 'zgenhostid':
       command => '/sbin/zgenhostid `hostid`',
       creates => '/etc/hostid',
@@ -61,7 +61,7 @@ class nest::base::zfs {
     require => Package['sys-fs/zfs'],
   }
 
-  unless $facts['is_container'] or $facts['running_live'] {
+  unless $facts['nest']['is_container'] or $facts['nest']['running_live'] {
     exec { 'generate-zpool-cache':
       command => "/sbin/zpool set cachefile= ${trusted['certname']}",
       creates => '/etc/zfs/zpool.cache',
@@ -69,7 +69,7 @@ class nest::base::zfs {
 
     # Manage swap volume properties for experimenting with workarounds listed in
     # https://github.com/openzfs/zfs/issues/7734
-    zfs { "${facts['rpool']}/swap":
+    zfs { "${facts['nest']['rpool']}/swap":
       compression    => 'off',
       sync           => 'standard',
       primarycache   => 'metadata',

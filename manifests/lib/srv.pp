@@ -4,15 +4,15 @@ define nest::lib::srv (
   Optional[String] $group = undef,
   Boolean          $zfs   = true,
 ) {
-  unless $facts['is_container'] {
+  unless $facts['nest']['is_container'] {
     ensure_resource('zfs', 'srv', {
-      'name'       => "${facts['rpool']}/srv",
+      'name'       => "${facts['nest']['rpool']}/srv",
       'mountpoint' => '/srv',
     })
 
     if $zfs {
       zfs { "srv/${name}":
-        name       => "${facts['rpool']}/srv/${name}",
+        name       => "${facts['nest']['rpool']}/srv/${name}",
         mountpoint => "/srv/${name}",
         require    => Zfs['srv'],
         before     => File["/srv/${name}"],

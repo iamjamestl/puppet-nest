@@ -1,7 +1,7 @@
 case $facts['osfamily'] {
   'Gentoo': {
     # Effectively disable firewall and service resources in containers
-    if $facts['is_container'] {
+    if $facts['nest']['is_container'] {
       Firewall <||> {
         ensure => absent,
       }

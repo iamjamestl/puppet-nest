@@ -14,7 +14,7 @@ class nest::base::dracut {
 
   $vconsole_params = "rd.vconsole.font=ter-v${::nest::console_font_size}b rd.vconsole.keymap=${::nest::base::systemd::keymap}"
 
-  if $facts['profile']['platform'] == 'live' {
+  if $facts['nest']['profile']['platform'] == 'live' {
     $base_config_content = @("EOT")
       add_dracutmodules+=" dmsquash-live livenet "
       omit_dracutmodules+=" zfs "

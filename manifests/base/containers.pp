@@ -1,11 +1,11 @@
 class nest::base::containers {
-  if $facts['is_container'] or $facts['running_live'] {
+  if $facts['nest']['is_container'] or $facts['nest']['running_live'] {
     $storage_driver = 'vfs'
   } else {
     $storage_driver = 'zfs'
 
     zfs { 'containers':
-      name       => "${facts['rpool']}/containers",
+      name       => "${facts['nest']['rpool']}/containers",
       mountpoint => '/var/lib/containers',
     }
   }

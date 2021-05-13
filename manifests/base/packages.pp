@@ -27,13 +27,13 @@ class nest::base::packages {
         ensure => installed,
       }
 
-      unless $facts['profile']['platform'] == 'beagleboneblack' {
+      unless $facts['nest']['profile']['platform'] == 'beagleboneblack' {
         package { 'sys-process/parallel':
           ensure => installed,
         }
       }
 
-      if $facts['profile']['platform'] in ['pinebookpro', 'sopine'] {
+      if $facts['nest']['profile']['platform'] in ['pinebookpro', 'sopine'] {
         package { 'sys-fs/mtd-utils':
           ensure => installed,
         }

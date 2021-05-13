@@ -1,5 +1,5 @@
 class nest::base::firmware {
-  case $facts['profile']['platform'] {
+  case $facts['nest']['profile']['platform'] {
     'beagleboneblack': {
       contain '::nest::base::firmware::uboot'
 
@@ -88,7 +88,7 @@ class nest::base::firmware {
     $platforms = $file[1]
     $target    = regsubst($file[0], '^[^/]*/', '')
 
-    if $facts['profile']['platform'] in $platforms {
+    if $facts['nest']['profile']['platform'] in $platforms {
       [$present + { $target => $source }, $absent]
     } else {
       [$present, $absent + { $target => $source }]

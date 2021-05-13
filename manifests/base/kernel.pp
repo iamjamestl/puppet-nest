@@ -6,7 +6,7 @@ class nest::base::kernel {
     config => '/usr/src/linux/.config',
   }
 
-  $sources_package = $facts['profile']['platform'] ? {
+  $sources_package = $facts['nest']['profile']['platform'] ? {
     'raspberrypi' => 'sys-kernel/raspberrypi-sources',
     default       => 'sys-kernel/gentoo-sources',
   }
@@ -19,7 +19,7 @@ class nest::base::kernel {
     ensure => installed,
   }
 
-  $defconfig = $facts['profile']['platform'] ? {
+  $defconfig = $facts['nest']['profile']['platform'] ? {
     'beagleboneblack' => 'multi_v7_defconfig',
     'pinebookpro'     => 'defconfig',
     'raspberrypi'     => 'bcm2711_defconfig',

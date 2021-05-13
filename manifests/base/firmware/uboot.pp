@@ -6,7 +6,7 @@ class nest::base::firmware::uboot {
     config => '/usr/src/u-boot/.config',
   }
 
-  $uboot_branch = $facts['profile']['platform'] ? {
+  $uboot_branch = $facts['nest']['profile']['platform'] ? {
     'pinebookpro' => 'pinebookpro',
     default       => 'main',
   }
@@ -22,7 +22,7 @@ class nest::base::firmware::uboot {
     refreshonly => true,
   }
 
-  $defconfig = $facts['profile']['platform'] ? {
+  $defconfig = $facts['nest']['profile']['platform'] ? {
     'beagleboneblack' => 'am335x_evm_defconfig',
     'pinebookpro'     => 'pinebook-pro-rk3399_defconfig',
     'raspberrypi'     => 'rpi_arm64_defconfig',
@@ -45,7 +45,7 @@ class nest::base::firmware::uboot {
     ;
   }
 
-  case $facts['profile']['platform'] {
+  case $facts['nest']['profile']['platform'] {
     'pinebookpro': {
       $build_options = 'BL31=/usr/src/arm-trusted-firmware/build/rk3399/release/bl31/bl31.elf'
 

@@ -82,7 +82,7 @@ class nest::base::portage {
   $emerge_default_opts = pick($facts['emerge_default_opts'], "--jobs=${::nest::concurrency} --load-average=${loadlimit}")
   $makeopts            = pick($facts['makeopts'], "-j${makejobs} -l${loadlimit}")
 
-  $features = $facts['is_container'] ? {
+  $features = $facts['nest']['is_container'] ? {
     true    => ['distcc', '-ipc-sandbox', '-pid-sandbox', '-network-sandbox', '-usersandbox'],
     default => ['distcc'],
   }
@@ -154,7 +154,7 @@ class nest::base::portage {
   }
 
   # Workaround https://bugs.gentoo.org/666560
-  if $facts['is_container'] and $facts['architecture'] != 'amd64' {
+  if $facts['nest']['is_container'] and $facts['architecture'] != 'amd64' {
     file { '/etc/portage/env/no-sandbox.conf':
       mode    => '0644',
       owner   => 'root',
@@ -170,7 +170,7 @@ class nest::base::portage {
     }
   }
 
-  if $facts['is_container'] {
+  if $facts['nest']['is_container'] {
     file { '/etc/portage/profile/profile.bashrc':
       mode    => '0644',
       owner   => 'root',
